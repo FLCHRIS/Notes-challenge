@@ -1,23 +1,65 @@
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { setLocalStorage } from '../config/localStorage'
+import useForm from '../hooks/useForm'
+import UserContext from '../context/user/UserContext'
 import Input from '../components/Input'
 import UserIcon from '../icons/UserIcon'
 import LockIcon from '../icons/LockIcon'
+import Alert from '../components/Alert'
 
 const Login = () => {
+	const navigate = useNavigate()
+	const { logIn } = useContext(UserContext)
+	const { values, error, setError, handleChange, handleSubmit } = useForm(
+		{
+			username: '',
+			password: '',
+		},
+		false,
+	)
+
+	const validate = () => {
+		return values.username === 'chris_dev' && values.password === 'password'
+	}
+
+	const onSubmit = () => {
+		setError(false)
+
+		if (!validate()) return setError(true)
+
+		setLocalStorage('session', values)
+		logIn(values)
+
+		return navigate('/notes')
+	}
+
 	return (
 		<div className='mt-10 flex items-center justify-center'>
-			<form className='px-6 py-8 w-full max-w-lg rounded-md border border-gray-200 dark:border-gray-700'>
+			<form
+				className='px-6 py-8 w-full max-w-lg rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'
+				onSubmit={(e) => handleSubmit(e, onSubmit)}
+			>
 				<h1 className='text-3xl font-bold mb-3 text-gray-900 dark:text-white'>
 					Log In
 				</h1>
 				<p className='text-gray-800 dark:text-gray-300 mb-5'>
 					Please enter your username and password.
 				</p>
+				{error && (
+					<Alert type='error'>
+						<span className='font-medium'>Error:</span> Wrong
+						username or password.
+					</Alert>
+				)}
 				<div className='flex flex-col gap-7'>
 					<Input
 						label='Your username'
 						type='text'
 						id='username'
 						placeholder='chris_dev'
+						value={values.username}
+						onChange={handleChange}
 					>
 						<UserIcon style='size-5 text-gray-500 dark:text-gray-400' />
 					</Input>
@@ -26,6 +68,8 @@ const Login = () => {
 						type='password'
 						id='password'
 						placeholder='**********'
+						value={values.password}
+						onChange={handleChange}
 					>
 						<LockIcon style='size-5 text-gray-500 dark:text-gray-400' />
 					</Input>
