@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }) => {
 		const session = getLocalStorage('session')
 		if (!user && session) return logIn(session)
 		if (!user && !session) return navigate('/login')
-		console.log('hola')
 	}, [user, logIn, navigate])
 
 	return <>{children}</>
