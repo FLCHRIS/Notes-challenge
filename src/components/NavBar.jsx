@@ -19,7 +19,7 @@ const NavBar = () => {
 		<nav className='bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600 px-6 py-5 flex justify-between items-center w-full max-w-[1440px] mx-auto'>
 			<Link
 				to='/'
-				className='text-lg font-medium text-gray-800 dark:text-white hover:scale-95 transition'
+				className='text-lg font-medium text-gray-800 dark:text-white'
 			>
 				Notes App
 			</Link>
