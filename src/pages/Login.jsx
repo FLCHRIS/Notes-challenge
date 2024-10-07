@@ -43,7 +43,7 @@ const Login = () => {
 				<h1 className='text-3xl font-bold mb-3 text-gray-900 dark:text-white'>
 					Log In
 				</h1>
-				<p className='text-gray-800 dark:text-gray-300 mb-5'>
+				<p className='text-gray-800 dark:text-gray-300 mb-3'>
 					Please enter your username and password.
 				</p>
 				{error && (
@@ -52,7 +52,7 @@ const Login = () => {
 						username or password.
 					</Alert>
 				)}
-				<div className='flex flex-col gap-7'>
+				<div className='flex flex-col gap-3'>
 					<Input
 						label='Your username'
 						type='text'
@@ -75,7 +75,7 @@ const Login = () => {
 					</Input>
 					<button
 						type='submit'
-						className='text-white ml-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+						className='text-white ml-auto mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
 					>
 						Log In
 					</button>
