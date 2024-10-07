@@ -1,7 +1,12 @@
+import { useState } from 'react'
+
 import Input from '../Input'
 import ClosedIcon from '../../icons/ClosedIcon'
+import MultiSelect from '../MultiSelect'
 
 const NewNote = ({ setShowNewNote }) => {
+	const [values, setValues] = useState([])
+
 	return (
 		<div className='fixed z-10 size-full inset-0 animate-fadeIn flex items-center justify-center px-5 bg-white/5 dark:bg-gray-900/5 backdrop-blur-sm'>
 			<div className='relative px-5 py-7 w-full max-w-lg rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'>
@@ -39,11 +44,10 @@ const NewNote = ({ setShowNewNote }) => {
 								placeholder='Write your notes here...'
 							/>
 						</div>
-						<Input
-							label='Title'
-							type='text'
-							id='title'
-							placeholder='New note'
+						<MultiSelect
+							label='Categories'
+							values={values}
+							setValues={setValues}
 						/>
 						<button
 							type='submit'
