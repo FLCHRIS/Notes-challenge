@@ -18,6 +18,7 @@ const Router = () => {
 				}
 			>
 				<Route index element={<Notes />} />
+				<Route path='archived' element={<h1>Archived notes</h1>} />
 			</Route>
 			<Route path='/login' element={<MainLayout />}>
 				<Route index element={<Login />} />
