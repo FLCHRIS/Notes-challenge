@@ -1,8 +1,7 @@
 import { useState } from 'react'
-
-import Input from '../Input'
 import ClosedIcon from '../../icons/ClosedIcon'
 import MultiSelect from '../MultiSelect'
+import Input from '../Input'
 
 const NewNote = ({ setShowNewNote }) => {
 	const [values, setValues] = useState([])
