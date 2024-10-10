@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import { generateUUID } from '../../config/uuid'
 import NoteContext from '../../context/note/NoteContext'
 import ClosedIcon from '../../icons/ClosedIcon'
 import useForm from '../../hooks/useForm'
@@ -18,7 +19,11 @@ const NewNote = ({ setShowNewNote }) => {
 	)
 
 	const validate = () => {
-		return values.title !== '' && values.content !== '' && categories.length > 0
+		return (
+			values.title !== '' &&
+			values.content !== '' &&
+			categories.length > 0
+		)
 	}
 
 	const onSubmit = () => {
@@ -26,7 +31,14 @@ const NewNote = ({ setShowNewNote }) => {
 
 		if (!validate()) return setError(true)
 
-		addNote({ ...values, categories })
+		addNote({
+			id: generateUUID(),
+			createdAt: new Date(),
+			updatedAt: new Date(),
+			archived: false,
+			categories,
+			...values,
+		})
 		setShowNewNote(false)
 	}
 
@@ -44,9 +56,7 @@ const NewNote = ({ setShowNewNote }) => {
 				>
 					<ClosedIcon style='size-full text-gray-800 dark:text-gray-300' />
 				</button>
-				<form
-					onSubmit={(e) => handleSubmit(e, onSubmit)}
-				>
+				<form onSubmit={(e) => handleSubmit(e, onSubmit)}>
 					{error && (
 						<Alert type='error'>
 							<span className='font-medium'>Error:</span> Please fill in all fields
