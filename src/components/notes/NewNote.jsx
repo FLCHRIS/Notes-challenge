@@ -1,10 +1,34 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import NoteContext from '../../context/note/NoteContext'
 import ClosedIcon from '../../icons/ClosedIcon'
+import useForm from '../../hooks/useForm'
 import MultiSelect from '../MultiSelect'
 import Input from '../Input'
+import Alert from '../Alert'
 
 const NewNote = ({ setShowNewNote }) => {
-	const [values, setValues] = useState([])
+	const [categories, setCategories] = useState([])
+	const { addNote } = useContext(NoteContext)
+	const { values, error, setError, handleChange, handleSubmit } = useForm(
+		{
+			title: '',
+			content: '',
+		},
+		false,
+	)
+
+	const validate = () => {
+		return values.title !== '' && values.content !== '' && categories.length > 0
+	}
+
+	const onSubmit = () => {
+		setError(false)
+
+		if (!validate()) return setError(true)
+
+		addNote({ ...values, categories })
+		setShowNewNote(false)
+	}
 
 	return (
 		<div className='fixed z-10 size-full inset-0 animate-fadeIn flex items-center justify-center px-5 bg-white/5 dark:bg-gray-900/5 backdrop-blur-sm'>
@@ -20,13 +44,22 @@ const NewNote = ({ setShowNewNote }) => {
 				>
 					<ClosedIcon style='size-full text-gray-800 dark:text-gray-300' />
 				</button>
-				<form>
+				<form
+					onSubmit={(e) => handleSubmit(e, onSubmit)}
+				>
+					{error && (
+						<Alert type='error'>
+							<span className='font-medium'>Error:</span> Please fill in all fields
+						</Alert>
+					)}
 					<div className='flex flex-col gap-3'>
 						<Input
 							label='Title'
 							type='text'
 							id='title'
 							placeholder='New note'
+							value={values.title}
+							onChange={handleChange}
 						/>
 						<div>
 							<label
@@ -41,12 +74,14 @@ const NewNote = ({ setShowNewNote }) => {
 								rows='4'
 								className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 								placeholder='Write your notes here...'
+								value={values.content}
+								onChange={handleChange}
 							/>
 						</div>
 						<MultiSelect
 							label='Categories'
-							values={values}
-							setValues={setValues}
+							values={categories}
+							setValues={setCategories}
 						/>
 						<button
 							type='submit'
