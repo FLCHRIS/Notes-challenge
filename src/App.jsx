@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom'
 import Router from './router/Router'
 import UserProvider from './context/user/UserProvider'
+import NoteProvider from './context/note/NoteProvider'
 
 function App() {
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<Router />
+				<NoteProvider>
+					<Router />
+				</NoteProvider>
 			</UserProvider>
 		</BrowserRouter>
 	)
