@@ -15,12 +15,10 @@ const CATEGORIES = [
 const MultiSelect = ({ label, values, setValues }) => {
 	const [showDropdown, setShowDropdown] = useState(false)
 
-	const handleSelect = (value) => {
-		const index = values.indexOf(value)
-		index === -1
-			? setValues([...values, value])
-			: setValues(values.filter((v) => v !== value))
-		setShowDropdown(false)
+	const handleChange = (e) => {
+		e.target.checked
+			? setValues([...values, e.target.value])
+			: setValues(values.filter((v) => v !== e.target.value))
 	}
 
 	return (
@@ -58,14 +56,24 @@ const MultiSelect = ({ label, values, setValues }) => {
 							</button>
 						</li>
 						{CATEGORIES.map((category) => (
-							<li key={category.id}>
-								<button
-									type='button'
-									className='w-full p-2.5 text-start hover:bg-gray-200 hover:dark:bg-gray-800 transition-colors'
-									onClick={() => handleSelect(category.name)}
+							<li
+								key={category.id}
+								className='flex items-center gap-2 p-2.5 hover:bg-gray-200 hover:dark:bg-gray-800 transition-colors'
+							>
+								<input
+									id={category.name}
+									type='checkbox'
+									value={category.name}
+									checked={values.includes(category.name)}
+									onChange={handleChange}
+									className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500'
+								/>
+								<label
+									htmlFor={category.name}
+									className='w-full text-sm font-medium text-gray-900 dark:text-gray-300'
 								>
 									{category.name}
-								</button>
+								</label>
 							</li>
 						))}
 					</ul>
