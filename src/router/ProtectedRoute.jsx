@@ -4,14 +4,14 @@ import { getLocalStorage } from '../config/localStorage'
 import UserContext from '../context/user/UserContext'
 
 const ProtectedRoute = ({ children }) => {
-	const { user, logIn } = useContext(UserContext)
+	const { user, createSession } = useContext(UserContext)
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		const session = getLocalStorage('session')
-		if (!user && session) return logIn(session)
+		if (!user && session) return createSession(session)
 		if (!user && !session) return navigate('/login')
-	}, [user, logIn, navigate])
+	}, [user, createSession, navigate])
 
 	return <>{children}</>
 }
