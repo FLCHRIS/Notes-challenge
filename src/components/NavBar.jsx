@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { removeLocalStorage } from '../config/localStorage'
 import UserContext from '../context/user/UserContext'
 import useThemeToggle from '../hooks/useThemeToggle'
 import SunIcon from '../icons/SunIcon'
@@ -11,7 +10,6 @@ const NavBar = () => {
 	const { isDarkMode, toggleTheme } = useThemeToggle()
 
 	const handleLogOut = () => {
-		removeLocalStorage('session')
 		logOut()
 	}
 
