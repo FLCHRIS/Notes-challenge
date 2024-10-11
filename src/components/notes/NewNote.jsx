@@ -59,7 +59,8 @@ const NewNote = ({ setShowNewNote }) => {
 				<form onSubmit={(e) => handleSubmit(e, onSubmit)}>
 					{error && (
 						<Alert type='error'>
-							<span className='font-medium'>Error:</span> Please fill in all fields
+							<span className='font-medium'>Error:</span> Please
+							fill in all fields
 						</Alert>
 					)}
 					<div className='flex flex-col gap-3'>
