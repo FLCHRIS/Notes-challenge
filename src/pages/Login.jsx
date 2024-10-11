@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { setLocalStorage } from '../config/localStorage'
 import useForm from '../hooks/useForm'
 import UserContext from '../context/user/UserContext'
 import Input from '../components/Input'
@@ -28,7 +27,6 @@ const Login = () => {
 
 		if (!validate()) return setError(true)
 
-		setLocalStorage('session', values)
 		logIn(values)
 
 		return navigate('/notes')
