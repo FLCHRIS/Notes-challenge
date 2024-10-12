@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import NoteContext from '../../context/note/NoteContext'
-import NewNote from '../../components/notes/NewNote'
+import NoteForm from '../../components/notes/NoteForm'
 import ArchivedIcon from '../../icons/ArchivedIcon'
 import AddIcon from '../../icons/AddIcon'
 import CardNote from '../../components/notes/CardNote'
@@ -57,18 +57,14 @@ const Notes = () => {
 				{activeNotes.map((note) => (
 					<CardNote
 						key={note.id}
-						id={note.id}
-						title={note.title}
-						content={note.content}
-						updatedAt={note.updatedAt}
-						archived={note.archived}
+						note={note}
 					/>
 				))}
 			</div>
 			{activeNotes.length === 0 && (
 				<EmptyState message='There are no notes' />
 			)}
-			{showNewNote && <NewNote setShowNewNote={setShowNewNote} />}
+			{showNewNote && <NoteForm setShowNewNote={setShowNewNote} />}
 		</section>
 	)
 }
