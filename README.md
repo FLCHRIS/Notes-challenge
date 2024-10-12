@@ -20,11 +20,11 @@ Make sure you have the following software installed:
 1. Clone the repository from GitHub:
    ```bash
     git clone https://github.com/FLCHRIS/Notes-challenge.git
-   cd Notes-challenge
+    cd Notes-challenge
    ```
 2. Run the `start_app.sh` script to install dependencies and run the application:
    ```bash
-   ./start_app.sh
+    ./start_app.sh
    ```
    This command will install the dependencies and start the application in development mode.
 
