@@ -33,7 +33,6 @@ const NewNote = ({ setShowNewNote }) => {
 
 		addNote({
 			id: generateUUID(),
-			createdAt: new Date(),
 			updatedAt: new Date(),
 			archived: false,
 			categories,
