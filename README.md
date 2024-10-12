@@ -13,8 +13,8 @@ Make sure you have the following software installed:
 
 1. Clone the repository from GitHub:
    ```bash
-    git clone https://github.com/tu_usuario/tu_repo_privado.git
-   cd tu_repo_privado
+    git clone https://github.com/FLCHRIS/Notes-challenge.git
+   cd Notes-challenge
    ```
 2. Run the `start_app.sh` script to install dependencies and run the application:
    ```bash
