@@ -21,7 +21,7 @@ const NoteProvider = ({ children }) => {
 		})
 	}
 
-	const updateNotes = (id, updatedNote) => {
+	const updateNote = (id, updatedNote) => {
 		setNotes((prevNotes) => {
 			const updateNotes = prevNotes.map((note) =>
 				note.id === id ? { ...note, ...updatedNote } : note,
@@ -38,7 +38,7 @@ const NoteProvider = ({ children }) => {
 
 	return (
 		<NoteContext.Provider
-			value={{ notes, addNote, updateNotes, deleteNote }}
+			value={{ notes, addNote, updateNote, deleteNote }}
 		>
 			{children}
 		</NoteContext.Provider>
