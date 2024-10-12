@@ -1,18 +1,40 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import NoteContext from '../../context/note/NoteContext'
+import NewNote from '../../components/notes/NewNote'
 import ArchivedIcon from '../../icons/ArchivedIcon'
 import AddIcon from '../../icons/AddIcon'
-import NewNote from '../../components/notes/NewNote'
+import CardNote from '../../components/notes/CardNote'
+import EmptyState from '../../components/EmptyState'
+import Select from '../../components/Select'
 
 const Notes = () => {
+	const { notes } = useContext(NoteContext)
 	const [showNewNote, setShowNewNote] = useState(false)
+	const [selectedCategory, setSelectedCategory] = useState('')
+
+	const activeNotes = notes.filter((note) => {
+		return (
+			!note.archived &&
+			(selectedCategory === '' ||
+				note.categories.some(
+					(category) => category === selectedCategory,
+				))
+		)
+	})
 
 	return (
-		<div className='mt-5'>
+		<section className='mt-5'>
 			<div className='flex flex-col gap-5 md:flex-row md:justify-between'>
-				<h1 className='text-4xl font-medium text-gray-800 dark:text-white'>
-					My Notes
-				</h1>
+				<div className='flex items-center justify-between gap-2 md:gap-7'>
+					<h1 className='text-4xl font-medium text-gray-800 dark:text-white'>
+						My Notes
+					</h1>
+					<Select
+						value={selectedCategory}
+						setValue={setSelectedCategory}
+					/>
+				</div>
 				<nav className='flex gap-2 items-center justify-center'>
 					<button
 						type='button'
@@ -31,8 +53,23 @@ const Notes = () => {
 					</Link>
 				</nav>
 			</div>
+			<div className='mt-10 grid grid-cols-1 gap-3 justify-items-center md:grid-cols-2 lg:grid-cols-3'>
+				{activeNotes.map((note) => (
+					<CardNote
+						key={note.id}
+						id={note.id}
+						title={note.title}
+						content={note.content}
+						updatedAt={note.updatedAt}
+						archived={note.archived}
+					/>
+				))}
+			</div>
+			{activeNotes.length === 0 && (
+				<EmptyState message='There are no notes' />
+			)}
 			{showNewNote && <NewNote setShowNewNote={setShowNewNote} />}
-		</div>
+		</section>
 	)
 }
 
