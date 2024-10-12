@@ -2,6 +2,12 @@
 
 This application is a technical test for a note-taking manager.
 
+## Login
+
+To access the application, the credentials are:
+- **Username**: `chris_dev`
+- **Password**: `password`
+
 ## Requirements
 
 Make sure you have the following software installed:
