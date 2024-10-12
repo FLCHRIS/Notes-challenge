@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
+import Archived from '../pages/notes/Archived'
+import ProtectedRoute from './ProtectedRoute'
 import MainLayout from '../layout/MainLayout'
 import Notes from '../pages/notes/Notes'
 import Login from '../pages/Login'
-import ProtectedRoute from './ProtectedRoute'
 
 const Router = () => {
 	return (
@@ -18,7 +19,7 @@ const Router = () => {
 				}
 			>
 				<Route index element={<Notes />} />
-				<Route path='archived' element={<h1>Archived notes</h1>} />
+				<Route path='archived' element={<Archived />} />
 			</Route>
 			<Route path='/login' element={<MainLayout />}>
 				<Route index element={<Login />} />
