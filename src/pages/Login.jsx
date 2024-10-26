@@ -1,15 +1,18 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useForm from '../hooks/useForm'
 import UserContext from '../context/user/UserContext'
 import Input from '../components/Input'
 import UserIcon from '../icons/UserIcon'
 import LockIcon from '../icons/LockIcon'
+import QuestionIcon from '../icons/QuestionIcon'
 import Alert from '../components/Alert'
+import InfoLogIn from '../components/InfoLogIn'
 
 const Login = () => {
 	const navigate = useNavigate()
 	const { logIn } = useContext(UserContext)
+	const [showQuestion, setShowQuestion] = useState(false)
 	const { values, error, setError, handleChange, handleSubmit } = useForm(
 		{
 			username: '',
@@ -35,7 +38,7 @@ const Login = () => {
 	return (
 		<div className='mt-10 flex items-center justify-center'>
 			<form
-				className='px-6 py-8 w-full max-w-lg rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'
+				className='relative px-6 py-8 w-full max-w-lg rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'
 				onSubmit={(e) => handleSubmit(e, onSubmit)}
 			>
 				<h1 className='text-3xl font-bold mb-3 text-gray-900 dark:text-white'>
@@ -78,6 +81,12 @@ const Login = () => {
 						Log In
 					</button>
 				</div>
+				<button onClick={() => setShowQuestion(!showQuestion)} type="button" className='absolute top-2 right-2 size-8 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
+					<QuestionIcon style='size-full text-gray-500 dark:text-gray-400' />
+				</button>
+				{
+					showQuestion && <InfoLogIn />
+				}
 			</form>
 		</div>
 	)
